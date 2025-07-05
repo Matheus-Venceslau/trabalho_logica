@@ -104,7 +104,7 @@ void verificacao_cadastro_padrao()
 	if (arquivo == NULL)
 	{ // VerificaÃ§Ã£o se o arquivo ja existe
 		system("cls");
-		printf("Bem-vindo! O arquivo PRODUTOS.DAT jÃ¡ esta pronto para o cadastro padrao! Pressione qualquer tecla \n");
+		printf("Bem-vindo! O arquivo PRODUTOS.DAT já esta pronto para o cadastro padrao! Pressione qualquer tecla \n");
 		getch();
 		cadastro_padrao();
 	}
@@ -137,7 +137,7 @@ void fechar_caixa()
 	printf("\nForam atendidos: %d", quantidade_clientes);
 	getch();
 
-	printf("\n\nDeseja gerar o relatÃ³rio do dia? [s/n]-> ");
+	printf("\n\nDeseja gerar o relatório do dia? [s/n]-> ");
 	fechar_caixa = getch();
 	if (fechar_caixa == 's')
 	{
@@ -174,7 +174,7 @@ void leve(int formaPagamento)
 
 	case 2:
 		system("color F5");
-		printf("\n\n========== PEDIDO PAGO COM CARTÃƒO DE CRÃ‰DITO/DÃ‰BITO ========== \n");
+		printf("\n\n========== PEDIDO PAGO COM CARTÃƒO DE CRÉDITO/DÉBITO ========== \n");
 		getch();
 		break;
 
@@ -286,7 +286,7 @@ int contador_produtos(char nome_arquivo[20 + 1])
 
 	if (arquivo == NULL)
 	{
-		printf("\nArquivo nï¿½o encontrado ou erro ao abrir.\n");
+		printf("\nArquivo não encontrado ou erro ao abrir.\n");
 		return 0;
 	}
 
@@ -313,7 +313,7 @@ int contador_pedidos(char nome_arquivo[20 + 1])
 	rewind(arquivo);
 	if (arquivo == NULL)
 	{
-		printf("\nArquivo nï¿½o encontrado ou erro ao abrir\n");
+		printf("\nArquivo não encontrado ou erro ao abrir\n");
 		return -1;
 	}
 
@@ -340,7 +340,7 @@ int pagamento_pedido(int codPedido)
 		printf("======= Como deseja efetuar o pagamento? =======\n");
 		printf("================================================\n");
 		printf("=------ 1 - Pix -------------------------------=\n");
-		printf("=------ 2 - CartÃ£o Debito/credito -------------=\n");
+		printf("=------ 2 - Cartão Debito/credito -------------=\n");
 		printf("=------ 3 - Dinheiro --------------------------=\n");
 		printf("=------ 0 - Cancelar pedido -------------------=\n");
 		printf("================================================\n");
@@ -361,7 +361,7 @@ int pagamento_pedido(int codPedido)
 		printf("\n\nPor favor, pague o valor do pedido e depois aperte qualquer tecla para continuar!\n");
 		getch();
 		system("cls");
-		printf("============== Vocï¿½ pagou! ==============\n\n");
+		printf("============== Você pagou! ==============\n\n");
 		printf("Para prosseguir aperte qualquer tecla! ");
 		getch();
 
@@ -371,7 +371,7 @@ int pagamento_pedido(int codPedido)
 	{
 		salva_cartao(codPedido);
 		system("cls");
-		printf("============== Vocï¿½ pagou! ==============\n\n");
+		printf("============== Você pagou! ==============\n\n");
 		printf("Para prosseguir aperte qualquer tecla! ");
 		getch();
 		return 2;
@@ -379,7 +379,7 @@ int pagamento_pedido(int codPedido)
 	else if (pagamento == 3)
 	{
 		system("cls");
-		printf("============== Vocï¿½ pagou! ==============\n\n");
+		printf("============== Você pagou! ==============\n\n");
 		printf("Para prosseguir aperte qualquer tecla! ");
 		getch();
 		return 3;
@@ -410,7 +410,7 @@ void salva_cartao(int codPedido)
 	do
 	{
 		system("cls");
-		printf("Digite o nÃºmero do cartÃ£o (16 dÃ­gitos): ");
+		printf("Digite o número do cartão (16 dígitos): ");
 		fflush(stdin);
 		fgets(cartao.numeroCartao, sizeof(cartao.numeroCartao), stdin);
 
@@ -421,7 +421,7 @@ void salva_cartao(int codPedido)
 
 		if (strlen(cartao.numeroCartao) == 16)
 		{
-			printf("\nO nÃºmero digitado estÃ¡ correto? [s/n]\n-> ");
+			printf("\nO número digitado está correto? [s/n]\n-> ");
 			fflush(stdin);
 			cartao_correto = getche();
 		}
@@ -434,7 +434,7 @@ void salva_cartao(int codPedido)
 			cartao.numeroCartao + 12);
 
 	fprintf(arquivo_cartao,
-			"-----------------------------\nCÃ³digo do pedido: %d\nNÃºmero do cartÃ£o: %s\n\n",
+			"-----------------------------\nCódigo do pedido: %d\nNúmero do cartão: %s\n\n",
 			cartao.codPedido,
 			cartao_formatado);
 
@@ -464,6 +464,7 @@ void atendimento_cliente()
 	PRODUTOS produto;
 	PEDIDO pedido;
 	ITENS_PEDIDO itens_pedido;
+	int quantidade_pedidos;
 
 	system("color 07");
 	int produto_escolhido = 0;
@@ -480,7 +481,7 @@ void atendimento_cliente()
 		system("cls");
 		printf("===================== Bem-vindo ao atendimento ao cliente! =====================\n");
 
-		printf("\nComo vocï¿½ deseja ser chamado?\n-> ");
+		printf("\nComo você deseja ser chamado?\n-> ");
 		fflush(stdin);
 		gets(pedido.nomeCliente);
 
@@ -507,13 +508,13 @@ void atendimento_cliente()
 			}
 		}
 
-		printf("\nDigite o nï¿½mero do produto escolhido [0 -> Voltar]: ");
+		printf("\nDigite o número do produto escolhido [0 -> Voltar]: ");
 		fflush(stdin);
 		scanf("%i", &produto_escolhido);
 
 		if (produto_escolhido > contador_produtos("PRODUTOS.DAT"))
 		{
-			printf("\n\nProduto invï¿½lido!");
+			printf("\n\nProduto inválido!");
 			getch();
 			atendimento_cliente();
 		}
@@ -543,14 +544,14 @@ void atendimento_cliente()
 
 		if (itens_pedido.nomeProd == NULL)
 		{
-			printf("\n\nERRO - Produto nï¿½o encontrado\n");
+			printf("\n\nERRO - Produto não encontrado\n");
 			getch();
 			atendimento_cliente();
 		}
 
 		do
 		{
-			printf("\nQual ï¿½ a quantidade desejada? [0 -> Voltar]: ");
+			printf("\nQual é a quantidade desejada? [0 -> Voltar]: ");
 			fflush(stdin);
 			scanf("%d", &itens_pedido.quantidade);
 
@@ -587,31 +588,24 @@ void atendimento_cliente()
 	} while (novo_item != 'n');
 	quantidade_pedidos_dia = quantidade_pedidos_dia + quantidade_itens_pedidos; // Fechar caixa
 
-	int quantidade_pedidos = contador_pedidos("PAGAMENTOS.DAT");
-
-	if (quantidade_pedidos == -1)
-	{
-		menu();
-	}
-
-	pedido.codPedido = quantidade_pedidos + 1;
-
 	// Modulo pagamento
 
 	pedido.forma_pagamento = pagamento_pedido(pedido.codPedido);
 
 	// Depois de pago, salva o pedido
 	salva_pedido = fopen("PAGAMENTOS.DAT", "a");
-
+	quantidade_pedidos = contador_pedidos("PAGAMENTOS.DAT");
+	pedido.codPedido = quantidade_pedidos + 1;
+	
 	pedido.quantidade_pedidos = quantidade_itens_pedidos;
 
-	fprintf(salva_pedido, "\n================================\nCï¿½digo do pedido: %d \n\nNome do cliente: %s", pedido.codPedido, pedido.nomeCliente);
+	fprintf(salva_pedido, "\n================================\nCódigo do pedido: %d \n\nNome do cliente: %s", pedido.codPedido, pedido.nomeCliente);
 	pedido.totalPedido = 0;
 	int i = 0;
 	for (i = 0; i < pedido.quantidade_pedidos; i++)
 	{
 		fprintf(salva_pedido,
-				"\nItem %d:\nNome do item: %s\nQuantidade pedida: %d\nValor unitï¿½rio: %.2f\nTotal do item: %.2f\n\n",
+				"\nItem %d:\nNome do item: %s\nQuantidade pedida: %d\nValor unitário: %.2f\nTotal do item: %.2f\n\n",
 				i + 1,
 				pedido.itensPedido[i].nomeProd,
 				pedido.itensPedido[i].quantidade,
@@ -619,7 +613,7 @@ void atendimento_cliente()
 				pedido.itensPedido[i].totalItem);
 		pedido.totalPedido = pedido.totalPedido + pedido.itensPedido[i].totalItem;
 	}
-	fprintf(salva_pedido, "O total do pedido ï¿½: %.2f\n\n", pedido.totalPedido);
+	fprintf(salva_pedido, "O total do pedido é: %.2f\n\n", pedido.totalPedido);
 
 	valor_vendido = valor_vendido + pedido.totalPedido;
 	quantidade_clientes = quantidade_clientes + 1;
@@ -631,7 +625,7 @@ void atendimento_cliente()
 		break;
 
 	case 2:
-		fprintf(salva_pedido, "Pagamento efetuado com: CARTÃƒO\n");
+		fprintf(salva_pedido, "Pagamento efetuado com: CARTÃO\n");
 		break;
 
 	case 3:
@@ -677,7 +671,7 @@ void controle_de_filas()
 	// VerificaÃ§Ã£o se nÃ£o tem ninguem esperando
 	if (fim_fila == 0 && inicio_fila == 0)
 	{
-		printf("Ainda nÃ£o tem ninguÃ©m na fila!");
+		printf("Ainda não tem ninguém na fila!");
 		printf("\nPara onde voce deseja ir? [1-> menu / 2-> atendimento]\n-> ");
 		fflush(stdin);
 		onde_ir = getch();
@@ -697,7 +691,7 @@ void controle_de_filas()
 		printf("Codigo do pedido: %d\n", fila.fila[i]);
 	}
 
-	printf("\n\nO pedido %d jÃ¡ esta pronto? [s/n]\n-> ", fila.fila[inicio_fila]);
+	printf("\n\nO pedido %d já¡ esta pronto? [s/n]\n-> ", fila.fila[inicio_fila]);
 	liberar_pedido = getch();
 
 	if (liberar_pedido == 's')
@@ -712,7 +706,7 @@ void controle_de_filas()
 void adicionar_fila(int codigo, int forma_pagamento)
 {
 	system("cls");
-	printf("Como seu pedido Ã© muito grande, por favor se direcine a fila secundaria!\n\n");
+	printf("Como seu pedido é muito grande, por favor se direcine a fila secundaria!\n\n");
 	getch();
 
 	fila.fila[fim_fila] = codigo;					  // Adiciona o cliente no numero do final da fila, o codigo vai ser usado para puxar as informaÃ§Ãµes do pedido
@@ -785,7 +779,8 @@ int main()
 {
 	system("color 07");
 	srand(time(NULL));
-	setlocale(LC_ALL, "");
+	setlocale(LC_ALL, "Portuguese");
+	
 	verificacao_cadastro_padrao();
 
 	return 0;
